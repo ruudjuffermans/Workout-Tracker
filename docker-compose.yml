@@ -1,0 +1,33 @@
+
+services:
+  server:
+    build:
+      context: ./server
+      args:
+        NODE_ENV: development
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: always
+    ports:
+      - "3002:3002"
+    depends_on:
+      - db
+  db:
+    build:
+      context: ./db
+      args:
+        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_VERSION: ${POSTGRES_VERSION}
+        POSTGRES_PORT: ${POSTGRES_PORT}
+
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - postgres-storage:/var/lib/postgressql/data
+
+
+volumes:
+  postgres-storage:
