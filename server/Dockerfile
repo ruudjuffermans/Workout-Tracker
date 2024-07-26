@@ -1,28 +1,15 @@
-FROM node:18-slim as base
+FROM node:20.9.0-alpine
 
-ENV NODE_ENV=production
+WORKDIR /usr/src/app
 
-ARG PORT=3002
-ENV PORT $PORT
-EXPOSE $PORT
+RUN npm install -g npm@10.2.4
 
-RUN npm i npm@latest -g
+COPY package*.json ./
 
-COPY --chown=node:node ./entrypoint.sh /usr/local/bin/
+COPY . .
 
+RUN npm install
 
-RUN chmod +x /usr/local/bin/entrypoint.sh
+EXPOSE 8888
 
-USER node
-
-WORKDIR /app
-
-COPY --chown=node:node package.json package-lock.json* ./
-RUN npm ci && npm cache clean --force
-ENV PATH /app/node_modules/.bin:$PATH
-
-COPY --chown=node:node . ./src
-
-
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["node", "src/app.js"]
+CMD ["npm", "run", "dev"]

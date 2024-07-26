@@ -5,6 +5,9 @@ services:
       context: ./server
       args:
         NODE_ENV: development
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules      
     environment:
       POSTGRES_PASSWORD: postgres
     restart: always
