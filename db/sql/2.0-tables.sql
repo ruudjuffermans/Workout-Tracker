@@ -1,23 +1,23 @@
-CREATE TABLE Workout (
-    WorkoutID INT PRIMARY KEY,
-    Date DATE NOT NULL,
-    Description TEXT
+CREATE TABLE workout (
+    id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    description TEXT
 );
 
-CREATE TABLE Exercise (
-    ExerciseID INT PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL
+CREATE TABLE exercise (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
 );
 
 CREATE TYPE reps AS ENUM ('5', '10', '15', '20', '25');
 CREATE TYPE sets AS ENUM ('1', '2', '3', '4', '5');
 
-CREATE TABLE WorkoutItem (
-    WorkoutItemID SERIAL PRIMARY KEY,
-    WorkoutID INT,
-    ExerciseID INT,
-    Reps reps NOT NULL,
-    Sets sets NOT NULL,
-    FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID),
-    FOREIGN KEY (ExerciseID) REFERENCES Exercise(ExerciseID)
+CREATE TABLE workout_item (
+    id SERIAL PRIMARY KEY,
+    workout_id SERIAL,
+    exercise_id SERIAL,
+    reps reps NOT NULL,
+    sets sets NOT NULL,
+    FOREIGN KEY (workout_id) REFERENCES workout(id),
+    FOREIGN KEY (exercise_id) REFERENCES exercise(id)
 );
