@@ -13,8 +13,8 @@ app.get("/server-status", (req, res) => {
 });
 
 app.use(setupDb);
+
 router(app)
-app.use(notFound);
 
 app.listen(PORT, () => console.log(`Server up and running on port ${PORT}!`));
 

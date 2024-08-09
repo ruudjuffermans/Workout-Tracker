@@ -1,8 +1,8 @@
-const {userHandler} = require("../handlers");
+const {exerciseHandler} = require("../handlers");
 
-const readAllUsers = async (req, res) => {
-  const handlerResponse = await userHandler.readAllUsers(req.db);
+const readAllExercises = async (req, res) => {
+  const handlerResponse = await exerciseHandler.readAllExercises(req.db);
   res.status(200).json(handlerResponse);
 };
 
-module.exports = { readAllUsers };
+module.exports = { readAllExercises };

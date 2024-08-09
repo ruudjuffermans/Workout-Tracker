@@ -1,12 +1,13 @@
 CREATE TABLE workout (
     id SERIAL PRIMARY KEY,
-    date DATE NOT NULL,
+    name VARCHAR(255) NOT NULL,
     description TEXT
 );
 
 CREATE TABLE exercise (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    description TEXT
 );
 
 CREATE TYPE reps AS ENUM ('5', '10', '15', '20', '25');
