@@ -1,9 +1,10 @@
-const { userController } = require("../controllers");
+const { workoutController } = require("../controllers");
 
-function userRouter(app) {
-        app.get("/user",
-        userController.readAllUsers
-    )
+function workoutRouter(app) {
+  app.get("/workout/:id", workoutController.getWorkoutById);
+  app.get("/workout", workoutController.getAllWorkouts);
+  app.post("/workout", workoutController.createWorkout);
+  app.put("/workout/:id", workoutController.updateWorkout);
 }
 
-module.exports = userRouter
+module.exports = workoutRouter;
